@@ -1,0 +1,14 @@
+<h1>Books#show　投稿詳細画面</h1>
+
+<div>
+  <p>本のタイトル：<%= @book.title %></p>
+  <p>感想：<%= @book.body %></p>
+  <p>投稿ユーザー画像：<%= image_tag @post_image.user.get_profile_image(100,100) %></p>
+  <p>ユーザーネーム：<%= @book.user.name %></p>
+  <p>投稿日：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
+
+  <% if @book.user == current_user %>
+    <%= link_to "削除", book_path(@book), method: :delete %>
+  <% end %>
+
+</div>
