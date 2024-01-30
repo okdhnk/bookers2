@@ -1,10 +1,14 @@
-<h1>Users#show　ユーザー詳細画面</h1>
+<div>
+  <%= flash[:notice] %>
+</div>
+
 
 <!-- ユーザーの詳細 -->
 <div>
-  <h3><%= @user.name %></h3>
-  <h3><%= @user.introduction%></h3>
+  <h1>User info</h1>
   <%= image_tag @user.get_profile_image(100,100) %>
+  <h3>Name <%= @user.name %></h3>
+  <h3>Introduction <%= @user.introduction%></h3>
   <% if @user == current_user %>
     <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
   <% end %>
@@ -12,11 +16,18 @@
 
 <!-- ユーザーの投稿一覧 -->
 
+<h1>Books</h1>
+<p>Title</p>
+<p>Opinion</p>
 <% @books.each do |books| %>
 <div>
   <p>投稿ユーザー画像：<%= image_tag books.user.get_profile_image(100,100) %></p>
-  <p>本のタイトル：<%= books.title %></p>
-  <p>感想：<%= books.body %></p>
+  <p>Title：
+    <%= link_to book_path(books.id) do %>
+      <%= books.title %>
+    <% end %>
+  </p>
+  <p>Opinion：<%= books.body %></p>
   <p>ユーザーネーム：<%= books.user.name %></p>
 </div>
 <% end %>
