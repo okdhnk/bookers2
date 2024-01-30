@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '58d278657fdfc1a4e564ab4130081d65b968246649c40740cb91df82e924c10fcc3f37ed48dabb968ac9919dc6266e51e81e7c198d9ab7ae8d9b7bfef026129c'
+  # config.secret_key = '1b00c99270fb2626cc7ff4b9899f6c5e36cfd8c7580a975b3bb0bb9de9effeed34891ad089ff02e47b3bdd7ce843fed7fb0a869f7574fef439f190d8e91808e0'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -46,7 +46,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
+  config.authentication_keys = [:name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -58,14 +58,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [:name]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [:name]
-
-  config.authentication_keys = [:name]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -128,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '322d05f62f9e8235948b7165308f9f89e835a3208baffc310e21b3cdb9d00ca6cd0f0ed826dacadfba7d2491e74f4d0c93e5b76fee2a803ee0692aad5a938d27'
+  # config.pepper = '43607ab997fda883b5b66213e9da9dbe67e5fa72328fcd28b2b31544eb23b39c9a6f0002183ffa5da980fb685e89c99d29c28f1145637c22c268e3ec3e938e56'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -312,5 +310,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-
 end
