@@ -1,14 +1,77 @@
-<h1>Users</h1>
-<p>image</p>
-<p>name</p>
+<p id="notice"></p>
 
-<% @users.each do |user| %>
-  <div>
-    <p>投稿ユーザー画像：<%= image_tag user.get_profile_image(100,100) %></p>
-
-    <p>ユーザーネーム：<%= user.name %></p>
-
-    <%= link_to "Show", user_path(user.id) %>
-
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- ユーザーの詳細 -->
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>Introduction</th>
+            <th><%= @user.introduction%></th>
+            <th></th>
+          </tr>
+        </tbody>
+      </table>
+      <!-- ユーザープロフィール編集 -->
+      <div class="row">
+        <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block edit_user_155744" do %>
+                <i class="fa-solid fa-user-gear"></i>
+        <% end %>
+      </div>
+      <!-- 新規投稿 -->
+      <h2 class="mt-3">New book</h2>
+      <form action="/books" accept-charset="UTF-8" method="post">
+        <input type="hidden" name="authenticity_token" autocomplete="off">
+        <div class="form-group">
+          <label for="book_title">Title</label>
+          <input class="form-control book_tutle" type="text" name="book[title]" id="book_title">
+        </div>
+        <div class="form-group">
+          <label for="book_opinion">Opinion</label>
+          <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+        </div>
+      </form>
+    </div>
+    <!-- ユーザーの投稿一覧 -->
+    <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Image</th>
+            <th>name</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= image_tag user.get_profile_image(100,100) %>
+            </td>
+            <td>
+              ユーザーネーム：<%= user.name %>
+            </td>
+            <td>
+              <%= link_to "Show", user_path(user.id) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-<% end %>
+</div>
+
