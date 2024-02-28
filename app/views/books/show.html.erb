@@ -1,19 +1,80 @@
-<h1>Book detail</h1>
-
-<div>
-  <p>本のタイトル：<%= @book.title %></p>
-  <p>感想：<%= @book.body %></p>
-  <p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @book.user.name %></p>
-  <p>投稿日：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
-
-  <% if @book.user == current_user %>
-    <%= link_to "編集", edit_book_path(@book) %>
-  <% end %>
 
 
-  <% if @book.user == current_user %>
-    <%= link_to "削除", book_path(@book), method: :delete %>
-  <% end %>
-
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- ユーザーの詳細 -->
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>Introduction</th>
+            <th><%= @user.introduction%></th>
+            <th></th>
+          </tr>
+        </tbody>
+      </table>
+      <!-- ユーザープロフィール編集 -->
+      <div class="row">
+        <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block edit_user_155744" do %>
+                <i class="fa-solid fa-user-gear"></i>
+        <% end %>
+      </div>
+      <!-- 新規投稿 -->
+      <h2 class="mt-3">New book</h2>
+      <form action="/books" accept-charset="UTF-8" method="post">
+        <input type="hidden" name="authenticity_token" autocomplete="off">
+        <div class="form-group">
+          <label for="book_title">Title</label>
+          <input class="form-control book_tutle" type="text" name="book[title]" id="book_title">
+        </div>
+        <div class="form-group">
+          <label for="book_opinion">Opinion</label>
+          <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+        </div>
+      </form>
+    </div>
+    <!-- 本の詳細 -->
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table table-hover table-inverse">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(book.user.id) do %>
+              <%= image_tag @book.user.get_profile_image(100,100) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(book.id) do %><%= @book.title %><% end %>
+            </td>
+            <td>
+              <%= @book.body %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+              <%= link_to "編集", edit_book_path(@book) %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+              <%= link_to "削除", book_path(@book), method: :delete %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
